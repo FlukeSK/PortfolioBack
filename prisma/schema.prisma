@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Roles {
+  user
+  admin
+}
+
+model User {
+  id        Int     @id @default(autoincrement())
+  firstName String  @map("first_name")
+  lastName  String  @map("last_name")
+  email     String? @unique
+  mobile    String? @unique
+  password  String
+  status    Boolean @unique
+  Admin     Admin[]
+
+  @@map("users")
+}
+
+model Admin {
+  id        Int       @id @default(autoincrement())
+  email     String?   @unique
+  password  String
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp(0)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamp(0)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamp(0)
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int       @map("user_id")
+  title        String?
+  image        String?
+
+  @@map("admins")
+}
+
+model UserQue {
+  id Int @id @default(autoincrement())
+}
+
+model FullQue {
+  id    Int    @id @default(autoincrement())
+  round String
+}
+
+model InfoCat {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp(0)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamp(0)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamp(0)
+  nameCat   String    @map("name_cat")
+  genderCat String    @map("gender_cat")
+  ageCat    String    @map("age_cat")
+  breedCat  String    @map("breed_cat")
+  foodCat   String    @map("food_cat")
+}
