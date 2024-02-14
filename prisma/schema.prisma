@@ -10,20 +10,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Roles {
+enum Role {
   user
   admin
 }
 
 model User {
-  id        Int     @id @default(autoincrement())
-  firstName String  @map("first_name")
-  lastName  String  @map("last_name")
-  email     String? @unique
-  mobile    String? @unique
+  id        Int       @id @default(autoincrement())
+  firstName String    @map("first_name")
+  lastName  String    @map("last_name")
+  email     String?   @unique
+  mobile    String?   @unique
   password  String
-  status    Boolean @unique
   Admin     Admin[]
+  Role      Role
+  UserQue   UserQue[]
 
   @@map("users")
 }
@@ -37,14 +38,17 @@ model Admin {
   deletedAt DateTime? @map("deleted_at") @db.Timestamp(0)
   user      User      @relation(fields: [userId], references: [id])
   userId    Int       @map("user_id")
-  title        String?
-  image        String?
+  title     String?
+  image     String?
+  status    Boolean
 
   @@map("admins")
 }
 
 model UserQue {
-  id Int @id @default(autoincrement())
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @map("user_id")
 }
 
 model FullQue {
