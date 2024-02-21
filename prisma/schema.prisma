@@ -22,38 +22,23 @@ model User {
   email     String?   @unique
   mobile    String?   @unique
   password  String
-  Admin     Admin[]
-  Role      Role
+  status    Role      @default(user)
   UserQue   UserQue[]
 
   @@map("users")
-}
-
-model Admin {
-  id        Int       @id @default(autoincrement())
-  email     String?   @unique
-  password  String
-  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp(0)
-  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamp(0)
-  deletedAt DateTime? @map("deleted_at") @db.Timestamp(0)
-  user      User      @relation(fields: [userId], references: [id])
-  userId    Int       @map("user_id")
-  title     String?
-  image     String?
-  status    Boolean
-
-  @@map("admins")
 }
 
 model UserQue {
   id     Int  @id @default(autoincrement())
   user   User @relation(fields: [userId], references: [id])
   userId Int  @map("user_id")
+  count  Boolean
 }
 
 model FullQue {
-  id    Int    @id @default(autoincrement())
+  id    Int      @id @default(autoincrement())
   round String
+  date  DateTime
 }
 
 model InfoCat {
@@ -66,4 +51,6 @@ model InfoCat {
   ageCat    String    @map("age_cat")
   breedCat  String    @map("breed_cat")
   foodCat   String    @map("food_cat")
+  title     String?
+  image     String?
 }

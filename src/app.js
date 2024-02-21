@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
-app.use("auth", authRoute);
+app.use("/auth", authRoute);
 
 app.use(notFound);
 app.use(error);
