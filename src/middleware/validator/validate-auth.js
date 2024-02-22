@@ -13,15 +13,7 @@ const registerSchema = Joi.object({
         'string.empty':'last name is required',
         'any.required':'last name is required'
     }),
-    // =============== < Email > =============== //
-    // emailOrMobile: Joi.alternatives([
-    // Joi.string().email({ tlds: false }),
-    // Joi.string().pattern(/^[0-9]{10}$/)
-    // ]).required().messages({
-    //     'string.empty':'invalid email address or mobile number',
-    //     'any.required':'email or mobile is required'
-    // })
-    // .strip(),
+
     // =============== < Password > =============== //
     password: Joi.string()
     .pattern(/^[a-zA-Z0-9]{6,}$/)
@@ -52,6 +44,7 @@ const loginSchema = Joi.object({
         'string.empty':'invalid email address or mobile number',
         'any.required':'email or mobile is required'
     }),
+    
     // =============== < Password > =============== //
     password: Joi.string()
     .pattern(/^[a-zA-Z0-9]{6,}$/)
