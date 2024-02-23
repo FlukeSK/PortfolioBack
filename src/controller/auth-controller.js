@@ -5,7 +5,7 @@ const hashService = require('../services/hash-service');
 const jwtService = require('../services/jwt-service');
 
 exports.register = catchError(async (req, res, next) => {
-    console.log(req.body)
+    console.log(req.body , '*************************')
   const existsUser = await userService.findUserByemailOrMobile(
     req.body.email || req.body.mobile
     );
