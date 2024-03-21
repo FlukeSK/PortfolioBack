@@ -4,6 +4,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const authRoute = require("./routes/auth-route");
+const queueRoute = require("./routes/queue-route");
 
 const lateLimit = require("./middleware/rate-limit");
 const notFound = require("./middleware/notfound");
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.use("/auth", authRoute);
+app.use("/queue", queueRoute);
 
 app.use(notFound);
 app.use(error);
