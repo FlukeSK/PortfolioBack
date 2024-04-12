@@ -52,5 +52,5 @@ model InfoCat {
   breedCat  String    @map("breed_cat")
   foodCat   String    @map("food_cat")
   title     String?
-  image     String?
+  image     String?   @db.Text
 }
