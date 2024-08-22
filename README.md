@@ -1,0 +1,1 @@
+A portfolio for showcasing one's own work is used to introduce oneself and to seek a position that matches one's skills and qualifications, as well as to find a company that offers good opportunities for career development.
