@@ -4,11 +4,11 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const authRoute = require("./routes/auth-route");
-// const queueRoute = require("./routes/queue-route");
 
 const lateLimit = require("./middleware/rate-limit");
 const notFound = require("./middleware/notfound");
 const error = require("./middleware/error");
+const { getPrismaClient } = require("@prisma/client/runtime/library");
 
 const app = express();
 
@@ -23,5 +23,5 @@ app.use("/auth", authRoute);
 app.use(notFound);
 app.use(error);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8200;
 app.listen(PORT, () => console.log("server running on port ", PORT));
